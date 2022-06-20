@@ -1,14 +1,33 @@
 <template>
-  <div>我是移动</div>
+  <div class="bg-white sticky top-0 left-0 z-10">
+    <ul class="relative flex overflow-x-auto p-1 text-xs text-zinc-600">
+      <li
+        class="fixed top-0 right-[-1px] h-4 px-1 flex items-center bg-white z-20 shadow-l-white"
+      >
+        <svg-icon name="hamburger" class="w-1.5 h-1.5"></svg-icon>
+      </li>
+      <li
+        v-for="item in categories"
+        :key="item.id"
+        class="shrink-0 px-1.5 py-0.5 z-10 duration-200 last:mr-4"
+      >
+        {{ item.name }}
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { getCategories } from '@/api/category'
+import { PropType } from 'vue'
 
-async function getCategoryData() {
-  await getCategories()
-}
-getCategoryData()
+import { ICategoryItemDTO } from '@/api/category'
+
+const { categories } = defineProps({
+  categories: {
+    type: Array as PropType<Array<ICategoryItemDTO>>,
+    default: () => []
+  }
+})
 </script>
 
 <style></style>

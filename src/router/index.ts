@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { isMobile } from '@/utils/is'
+import { isMobile } from '@/utils/flexiable'
 import mobileRoutes from './modules/mobile-routes'
 import pcRoutes from './modules/pc-routes'
 
