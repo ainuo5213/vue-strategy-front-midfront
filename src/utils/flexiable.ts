@@ -20,8 +20,9 @@ export function useRem() {
   function onDOMLoaded() {
     const html = document.documentElement
     const fontSize = window.innerWidth / 10
+
     rem.value = fontSize > MAX_FONT_SIZE ? MAX_FONT_SIZE : fontSize
-    html.style.fontSize = fontSize + 'px'
+    html.style.fontSize = rem.value + 'px'
   }
   document.addEventListener('DOMContentLoaded', onDOMLoaded)
   return {
