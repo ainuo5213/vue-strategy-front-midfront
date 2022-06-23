@@ -5,7 +5,6 @@
       ref="ulRef"
     >
       <li
-        ref="sliderRef"
         :style="sliderStyle"
         class="absolute h-[22px] bg-zinc-900 rounded-lg duration-200"
       ></li>
@@ -19,65 +18,80 @@
         v-for="(item, index) in categories"
         :key="item.id"
         class="shrink-0 px-1.5 py-0.5 z-10 duration-200 last:mr-4"
-        @click="onCategoryClick(item, $event)"
+        @click="onCategoryClick(item, index)"
         :class="{
           'text-zinc-100': !currentCategory
             ? index === 0
             : currentCategory.id === item.id
         }"
+        :ref="setItemRef"
       >
         {{ item.name }}
       </li>
     </ul>
   </div>
   <popup v-model:visible="visible">
-    <div>test</div>
+    <mobile-menu
+      :categories="categories"
+      :index="currentCategoryIndex"
+      @item-click="onCategoryClick"
+    ></mobile-menu>
   </popup>
 </template>
 
 <script lang="ts" setup>
-import { onMounted, PropType, ref } from 'vue'
-
+import { onBeforeUpdate, onMounted, PropType, ref, watch } from 'vue'
+import MobileMenu from '@/views/main/components/menu/index.vue'
 import { ICategoryItemDTO } from '@/api/category'
+import { useScroll } from '@vueuse/core'
 const currentCategory = ref<ICategoryItemDTO>()
-const sliderRef = ref<HTMLLIElement>()
+const currentCategoryIndex = ref<number>(0)
 const ulRef = ref<HTMLUListElement>()
 const visible = ref<boolean>(false)
-
+const menuItemRefs: Array<HTMLLIElement> = []
+const { x: ulScrollLeft } = useScroll(ulRef)
 const { categories } = defineProps({
   categories: {
     type: Array as PropType<Array<ICategoryItemDTO>>,
     default: () => []
   }
 })
+
+const sliderStyle = ref({
+  transform: 'translateX(0px)',
+  width: '52px'
+})
+
 if (categories.length > 0) {
   currentCategory.value = categories.at(0)
 }
 
-const sliderStyle = ref({
-  transform: 'translateX(0px)',
-  width: '60px'
-})
+function setItemRef(el: any) {
+  if (el) {
+    menuItemRefs.push(el)
+  }
+}
 
 let ulPadding = 10
 onMounted(() => {
   ulPadding = parseFloat(getComputedStyle(ulRef.value!).paddingLeft) || 10
 })
+onBeforeUpdate(() => {
+  menuItemRefs.length = 0
+})
 
-function onCategoryClick(data: ICategoryItemDTO, event: MouseEvent) {
-  const target = event.target as HTMLLIElement
-  sliderStyle.value.transform = `translateX(${target.offsetLeft - ulPadding}px)`
-  sliderStyle.value.width = `${target.scrollWidth}px`
+watch(currentCategoryIndex, (newValue) => {
+  const { left, width } = menuItemRefs[newValue].getBoundingClientRect()
+  sliderStyle.value = {
+    transform: `translateX(${ulScrollLeft.value + left - ulPadding + 'px'})`,
+    width: width + 'px'
+  }
+})
+
+function onCategoryClick(data: ICategoryItemDTO, index: number) {
   currentCategory.value = data
-}
-function sleep() {
-  return new Promise((resolve) => {
-    setTimeout(resolve, 2000)
-  })
-}
-async function onClose(done: () => void) {
-  await sleep()
-  done()
+  currentCategoryIndex.value = index
+  visible.value = false
 }
 </script>
 
