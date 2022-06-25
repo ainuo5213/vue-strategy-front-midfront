@@ -12,7 +12,7 @@
         class="fixed top-0 right-[-1px] h-4 px-1 flex items-center bg-white z-20 shadow-l-white"
         @click="visible = true"
       >
-        <svg-icon name="hamburger" class="w-1.5 h-1.5"></svg-icon>
+        <a-svg-icon name="hamburger" class="w-1.5 h-1.5"></a-svg-icon>
       </li>
       <li
         v-for="(item, index) in categories"
@@ -30,13 +30,13 @@
       </li>
     </ul>
   </div>
-  <popup v-model:visible="visible">
+  <a-popup v-model:visible="visible">
     <mobile-menu
       :categories="categories"
       :index="currentCategoryIndex"
       @item-click="onCategoryClick"
     ></mobile-menu>
-  </popup>
+  </a-popup>
 </template>
 
 <script lang="ts" setup>

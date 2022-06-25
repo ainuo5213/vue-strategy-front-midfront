@@ -1,5 +1,7 @@
 <template>
-  <div>search</div>
+  <div>
+    <a-search></a-search>
+  </div>
 </template>
 
 <script lang="ts" setup></script>

@@ -9,7 +9,7 @@ export default class LibPlugin {
     for (const [relativePath, importCompFn] of Object.entries(modules)) {
       const compName = dirname(relativePath).slice('./'.length)
       const Comp = defineAsyncComponent(importCompFn)
-      app.component(compName, Comp)
+      app.component(`a-${compName}`, Comp)
     }
   }
 }
