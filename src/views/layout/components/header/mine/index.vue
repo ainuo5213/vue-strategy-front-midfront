@@ -9,11 +9,6 @@
           src="https://gss0.baidu.com/7Po3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/a8ec8a13632762d0a0cb5f55a7ec08fa503dc667.jpg"
         />
         <a-svg-icon
-          class="h-1.5 w-1.5 ml-0.5"
-          name="down-arrow"
-          fill-class="fill-zinc-900"
-        ></a-svg-icon>
-        <a-svg-icon
           class="h-1.5 w-1.5 absolute right-[16px] bottom-0"
           name="vip"
         ></a-svg-icon>
