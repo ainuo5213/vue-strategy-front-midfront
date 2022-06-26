@@ -1,7 +1,4 @@
+@import url(./transition.scss);
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  --maskBgColor: rgb(39 39 42 / 0.2);
-}

@@ -38,7 +38,7 @@
     </div>
     <transition name="slide" v-if="dropdown" v-show="isFocus">
       <div
-        class="max-h-[368px] w-full text-base overflow-auto bg-white absolute z-20 left-0 top-[56px] p-2 rounded border border-zinc-200 duration-200 hover:shadow-2xl opacity-0 group-hover:opacity-100"
+        class="max-h-[368px] w-full text-base overflow-auto bg-white absolute z-20 left-0 top-[56px] p-2 rounded border border-zinc-200 duration-500 hover:shadow-2xl"
       >
         <slot name="dropdown"></slot>
       </div>
@@ -95,16 +95,3 @@ function onInput(e: Event) {
 }
 const isFocus = ref(false)
 </script>
-
-<style lang="scss" scoped>
-.slide-enter-active,
-.slide-leave-active {
-  transition: all 0.5s;
-}
-
-.slide-enter-from,
-.slide-leave-from {
-  opacity: 0;
-  transform: translate3d(0, 40px, 0);
-}
-</style>
