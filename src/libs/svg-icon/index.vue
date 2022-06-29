@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import { computed, PropType } from 'vue'
 
-const { name, prefix } = defineProps({
+const props = defineProps({
   prefix: {
     type: String as PropType<string>,
     default: 'icon'
@@ -27,5 +27,5 @@ const { name, prefix } = defineProps({
   }
 })
 // 真实显示的svg图标
-const symbolId = computed(() => `#${prefix}-${name}`)
+const symbolId = computed(() => `#${props.prefix}-${props.name}`)
 </script>

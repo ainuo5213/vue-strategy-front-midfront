@@ -18,19 +18,17 @@
 </template>
 
 <script lang="ts" setup>
-import { ICategoryItemDTO } from '@/api/category'
-import { PropType } from 'vue'
+import { computed, PropType } from 'vue'
+import { useStore } from 'vuex'
 
 defineEmits(['itemClick'])
-
-const { categories } = defineProps({
-  categories: {
-    type: Array as PropType<Array<ICategoryItemDTO>>,
-    required: true
-  },
+defineProps({
   index: {
     type: Number as PropType<number>,
     default: 0
   }
 })
+
+const store = useStore()
+const categories = computed(() => store.getters.categories)
 </script>

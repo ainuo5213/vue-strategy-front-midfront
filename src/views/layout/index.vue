@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <pc-header></pc-header>
-    <pc-main></pc-main>
-    <floating></floating>
-  </div>
+  <pc-header></pc-header>
+  <pc-main></pc-main>
+  <floating></floating>
 </template>
 
 <script lang="ts" setup>

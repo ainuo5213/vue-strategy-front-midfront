@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <navigation></navigation>
-  </div>
+  <navigation></navigation>
 </template>
 
 <script lang="ts" setup>

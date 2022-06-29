@@ -4,7 +4,7 @@ export interface ICategoryItemDTO {
   id: string
   name: string
   col?: number
-  urlname: string
+  urlname?: string
 }
 
 export interface ICategorys {
